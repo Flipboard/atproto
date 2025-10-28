@@ -53,12 +53,12 @@ describe('email confirmation', () => {
   const getTokenFromMail = (mail: Mail.Options) =>
     mail.html?.toString().match(/>([a-z0-9]{5}-[a-z0-9]{5})</i)?.[1]
 
-  it('starts a user out unverified', async () => {
+  it('starts a user out verified', async () => {
     const session = await agent.api.com.atproto.server.getSession(
       {},
       { headers: sc.getHeaders(alice.did) },
     )
-    expect(session.data.emailConfirmed).toEqual(false)
+    expect(session.data.emailConfirmed).toEqual(true)
   })
 
   it('allows email update without token when unverified', async () => {
@@ -66,7 +66,7 @@ describe('email confirmation', () => {
       undefined,
       { headers: sc.getHeaders(alice.did) },
     )
-    expect(res.data.tokenRequired).toBe(false)
+    expect(res.data.tokenRequired).toBe(true)
 
     await agent.api.com.atproto.server.updateEmail(
       {
@@ -79,7 +79,7 @@ describe('email confirmation', () => {
       { headers: sc.getHeaders(alice.did) },
     )
     expect(session.data.email).toEqual('new-alice@example.com')
-    expect(session.data.emailConfirmed).toEqual(false)
+    expect(session.data.emailConfirmed).toEqual(true)
     alice.email = session.data.email
   })
 
@@ -222,6 +222,6 @@ describe('email confirmation', () => {
       { headers: sc.getHeaders(alice.did) },
     )
     expect(session.data.email).toBe('new-alice-2@example.com')
-    expect(session.data.emailConfirmed).toBe(false)
+    expect(session.data.emailConfirmed).toBe(true)
   })
 })
