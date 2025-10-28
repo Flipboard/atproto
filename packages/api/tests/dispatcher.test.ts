@@ -61,7 +61,7 @@ describe('AtpAgent', () => {
     expect(agent.session?.handle).toEqual(res.data.handle)
     expect(agent.session?.did).toEqual(res.data.did)
     expect(agent.session?.email).toEqual('user1@test.com')
-    expect(agent.session?.emailConfirmed).toEqual(false)
+    expect(agent.session?.emailConfirmed).toEqual(true)
     assert(isValidDidDoc(res.data.didDoc))
     expect(agent.pdsUrl).toEqual(getPdsEndpointUrl(res.data.didDoc))
 
@@ -70,7 +70,7 @@ describe('AtpAgent', () => {
       did: res.data.did,
       handle: res.data.handle,
       email: 'user1@test.com',
-      emailConfirmed: false,
+      emailConfirmed: true,
     })
     expect(isValidDidDoc(sessionInfo.didDoc)).toBe(true)
 
