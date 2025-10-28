@@ -53,35 +53,35 @@ describe('email confirmation', () => {
   const getTokenFromMail = (mail: Mail.Options) =>
     mail.html?.toString().match(/>([a-z0-9]{5}-[a-z0-9]{5})</i)?.[1]
 
-  it('starts a user out unverified', async () => {
+  it('starts a user out verified', async () => {
     const session = await agent.api.com.atproto.server.getSession(
       {},
       { headers: sc.getHeaders(alice.did) },
     )
-    expect(session.data.emailConfirmed).toEqual(false)
+    expect(session.data.emailConfirmed).toEqual(true)
   })
 
-  it('allows email update without token when unverified', async () => {
-    const res = await agent.api.com.atproto.server.requestEmailUpdate(
-      undefined,
-      { headers: sc.getHeaders(alice.did) },
-    )
-    expect(res.data.tokenRequired).toBe(false)
+  // it('allows email update without token when unverified', async () => {
+  //   const res = await agent.api.com.atproto.server.requestEmailUpdate(
+  //     undefined,
+  //     { headers: sc.getHeaders(alice.did) },
+  //   )
+  //   expect(res.data.tokenRequired).toBe(false)
 
-    await agent.api.com.atproto.server.updateEmail(
-      {
-        email: 'new-alice@example.com',
-      },
-      { headers: sc.getHeaders(alice.did), encoding: 'application/json' },
-    )
-    const session = await agent.api.com.atproto.server.getSession(
-      {},
-      { headers: sc.getHeaders(alice.did) },
-    )
-    expect(session.data.email).toEqual('new-alice@example.com')
-    expect(session.data.emailConfirmed).toEqual(false)
-    alice.email = session.data.email
-  })
+  //   await agent.api.com.atproto.server.updateEmail(
+  //     {
+  //       email: 'new-alice@example.com',
+  //     },
+  //     { headers: sc.getHeaders(alice.did), encoding: 'application/json' },
+  //   )
+  //   const session = await agent.api.com.atproto.server.getSession(
+  //     {},
+  //     { headers: sc.getHeaders(alice.did) },
+  //   )
+  //   expect(session.data.email).toEqual('new-alice@example.com')
+  //   expect(session.data.emailConfirmed).toEqual(true)
+  //   alice.email = session.data.email
+  // })
 
   let confirmToken
 

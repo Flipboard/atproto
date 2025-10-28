@@ -420,6 +420,7 @@ exports[`proxies admin requests fetches repo details. 1`] = `
 Object {
   "did": "user(0)",
   "email": "eve@test.com",
+  "emailConfirmedAt": "1970-01-01T00:00:00.000Z",
   "handle": "eve.test",
   "indexedAt": "1970-01-01T00:00:00.000Z",
   "invitedBy": Object {

@@ -60,7 +60,7 @@ describe('auth', () => {
       did: account.did,
       handle: account.handle,
       email,
-      emailConfirmed: false,
+      emailConfirmed: true,
       active: true,
     })
     // Valid refresh token
@@ -90,7 +90,7 @@ describe('auth', () => {
       did: session.did,
       handle: session.handle,
       email,
-      emailConfirmed: false,
+      emailConfirmed: true,
       active: true,
     })
     // Valid refresh token
@@ -135,7 +135,7 @@ describe('auth', () => {
       did: session.did,
       handle: session.handle,
       email,
-      emailConfirmed: false,
+      emailConfirmed: true,
       active: true,
     })
     // Valid refresh token

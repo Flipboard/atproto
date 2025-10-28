@@ -142,6 +142,7 @@ export const registerAccount = async (
         did,
         email: email.toLowerCase(),
         passwordScrypt,
+        emailConfirmedAt: new Date().toISOString(),
       })
       .onConflict((oc) => oc.doNothing())
       .returning('did'),

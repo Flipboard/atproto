@@ -284,7 +284,7 @@ export class CredentialSession implements SessionManager {
         handle: res.data.handle,
         did: res.data.did,
         email: data.email,
-        emailConfirmed: false,
+        emailConfirmed: true,
         emailAuthFactor: false,
         active: true,
       }
