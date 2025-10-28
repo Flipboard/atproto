@@ -124,7 +124,7 @@ describe('admin get repo view', () => {
         { headers: await ozone.modHeaders(ids.ToolsOzoneModerationGetRepo) },
       )
 
-    expect(beforeEmailVerification.emailConfirmedAt).toBeUndefined()
+    expect(beforeEmailVerification.emailConfirmedAt).toEqual('1970-01-01T00:00:00.000Z')
     const timestampBeforeVerification = Date.now()
     const bobsAccount = sc.accounts[sc.dids.bob]
     const verificationToken =
